@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#050505"/>
+  <!-- Subtle border -->
+  <rect width="32" height="32" rx="7" fill="none" stroke="#00D4FF" stroke-width="1.2" stroke-opacity="0.3"/>
+  <!-- DG monogram -->
+  <text
+    x="16"
+    y="22"
+    text-anchor="middle"
+    font-family="'Space Grotesk', 'Inter', system-ui, sans-serif"
+    font-weight="700"
+    font-size="15"
+    letter-spacing="-0.5"
+    fill="#00D4FF"
+  >DG</text>
+</svg>

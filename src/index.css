@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #00D4FF; /* Deep tech cyan */
+  --bg: #050505;
+  --surface: rgba(20, 20, 25, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(0, 163, 255, 0.25);
+  color: white;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: #1a1a24; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #2a2a3a; }
+
+html { scroll-behavior: auto; }
+
+body {
+  background: #050505;
+  color: #E2E8F0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* ── Deep Tech Grid ────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center center;
+}
+
+/* ── Bento Box (Glassmorphism 2.0) ──────────────── */
+.bento-box {
+  background: rgba(15, 15, 20, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--tw-gradient-bento-gradient);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.bento-box:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 212, 255, 0.1);
+}
+
+/* ── Text Effects ──────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-accent-gradient {
+  color: var(--accent);
+  text-shadow: 0 0 30px var(--accent);
+}
+
+/* ── Char animation containers ─────────────────── */
+.char-wrap {
+  overflow: hidden;
+  display: inline-block;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.char-wrap span {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+/* ── Magnetic button ───────────────────────────── */
+.magnetic {
+  display: inline-block;
+}
+
+/* ── Nav ───────────────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after { width: 100%; }
+
+/* ── Loader ────────────────────────────────────── */
+.loader-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99997;
+  background: #040406;
+}
+
+.loader-code {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Glows ─────────────────────────────────────── */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* ── Global Transitions & Focus ────────────────── */
+section { position: relative; overflow: hidden; }
+section:last-child { overflow: visible; }
+
+/* ── Section fade edges ─────────────────────────── */
+/* Subtle gradient at top of each section blends with background */
+section:not(#hero)::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #050505 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Scroll smoothness ──────────────────────────── */
+html {
+  scroll-behavior: auto; /* GSAP handles all scroll */
+}
+
+
+/* Typewriter clip reveal for loader lines */
+@keyframes typewriter-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+
+/* ── Sophisticated Glow ────────────────────────── */
+@keyframes aurora {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10%, 15%); }
+  100% { transform: translate(0, 0); }
+}
+
+.aurora-bg {
+  position: absolute;
+  filter: blur(120px);
+  opacity: 0.2;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: aurora 20s ease-in-out infinite;
+}
+
+/* ── Masterpiece Aesthetics ───────────────────── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Steel gradient for first name — flows in reverse, slower */
+.steel-liquid {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(148, 163, 184, 0.65) 25%,
+    #ffffff 50%,
+    rgba(148, 163, 184, 0.65) 75%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: liquid-flow 9s linear infinite reverse;
+}
+
+.metal-liquid {
+  background: linear-gradient(
+    90deg, 
+    var(--accent) 0%, 
+    #fff 25%, 
+    var(--accent) 50%, 
+    #fff 75%, 
+    var(--accent) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: liquid-flow 4s linear infinite;
+}
+
+@keyframes liquid-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.hud-element {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  color: var(--accent);
+  opacity: 0.4;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ── Film Grain Noise ──────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+*:focus-visible {
+  outline: 2px solid #00A3FF;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ── Marquee ───────────────────────────────────── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
