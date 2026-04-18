@@ -93,7 +93,7 @@ export default function Footer() {
               <div className="flex gap-3 pt-4">
                 {socials.map(({ icon: Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-                    className="w-10 h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-muted hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-300 cursor-none">
+                    className="w-10 h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-muted hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-300">
                     <Icon className="text-sm" />
                   </a>
                 ))}

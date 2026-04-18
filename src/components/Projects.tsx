@@ -71,14 +71,16 @@ function CodePreview({ project, accent }: { project: typeof projects[0]; accent:
 
       {/* Hover overlay with links */}
       <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/75 backdrop-blur-sm z-20">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-12 h-12 rounded-full bg-white/8 hover:bg-white hover:text-black flex items-center justify-center transition-all border border-white/10"
-        >
-          <Github className="w-5 h-5" />
-        </a>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-12 h-12 rounded-full bg-white/8 hover:bg-white hover:text-black flex items-center justify-center transition-all border border-white/10"
+          >
+            <Github className="w-5 h-5" />
+          </a>
+        )}
         <a
           href={project.live}
           target="_blank"
@@ -148,16 +150,20 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         </div>
 
         <div className="flex items-center gap-4 pt-2">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted/50 hover:text-primary transition-colors duration-300 font-mono text-xs"
-          >
-            <Github className="w-3.5 h-3.5" />
-            <span>repositório</span>
-          </a>
-          <div className="w-px h-4 bg-white/10" />
+          {project.github && (
+            <>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-muted/50 hover:text-primary transition-colors duration-300 font-mono text-xs"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>repositório</span>
+              </a>
+              <div className="w-px h-4 bg-white/10" />
+            </>
+          )}
           <a
             href={project.live}
             target="_blank"
