@@ -234,15 +234,20 @@ export default function Projects() {
       const amountToScroll = Math.max(0, scrollWidth - viewportWidth);
       if (amountToScroll <= 0) return;
 
-      // Card title reveals — offset based on each card's actual left position
+      // Set initial position to far right (heading panel is the last flex child)
+      gsap.set(scrollRef.current, { x: -amountToScroll });
+
+      // Card title reveals — reversed scroll: cards appear from the left side
       const cards = Array.from(scrollRef.current?.querySelectorAll('.project-card') || []);
       cards.forEach((card) => {
         const titleEl = card.querySelector('.card-title-inner') as HTMLElement | null;
         if (!titleEl) return;
         const cardEl = card as HTMLElement;
-        // When this much has been scrolled, the card center reaches the viewport center
-        const scrollAtCenter = Math.max(0, cardEl.offsetLeft + cardEl.offsetWidth / 2 - viewportWidth / 2);
-        const triggerAt = Math.max(0, scrollAtCenter - viewportWidth * 0.4);
+        // In reversed scroll, card center reaches viewport center at this scroll offset
+        const triggerAt = Math.max(
+          0,
+          amountToScroll - cardEl.offsetLeft - cardEl.offsetWidth / 2 + viewportWidth / 2
+        );
 
         gsap.set(titleEl, { yPercent: 110 });
         gsap.to(titleEl, {
@@ -255,9 +260,9 @@ export default function Projects() {
         });
       });
 
-      // Horizontal scroll
+      // Horizontal scroll — reversed: from x=-amountToScroll back to x=0
       gsap.to(scrollRef.current, {
-        x: -amountToScroll,
+        x: 0,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -296,7 +301,16 @@ export default function Projects() {
         className="flex h-full items-center"
         style={{ width: 'fit-content' }}
       >
-        {/* Heading panel — scrolls with cards */}
+        {/* Start spacer */}
+        <div className="w-[20vw] h-full shrink-0 flex items-center justify-center">
+          <div className="w-px h-[25vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
+        </div>
+
+        {projects.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} />
+        ))}
+
+        {/* Heading panel — last, revealed as scroll destination */}
         <div
           className="relative flex flex-col justify-center h-full shrink-0 px-[8vw] md:px-[10vw]"
           style={{ minWidth: 'clamp(320px, 72vw, 60vw)' }}
@@ -315,7 +329,7 @@ export default function Projects() {
             <span className="font-mono text-xs text-muted tracking-[0.2em] uppercase">Projects</span>
           </div>
 
-          <div className="flex items-end gap-2 mb-5">
+          <div className="mb-5 overflow-hidden">
             <div
               className="font-display font-bold tracking-tight leading-[0.9]"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
@@ -326,14 +340,6 @@ export default function Projects() {
                 </span>
               ))}
             </div>
-            <div className="overflow-hidden pb-1">
-              <span
-                className="title-char inline-block font-display font-bold tracking-tight text-muted"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: 0.9 }}
-              >
-                _PORTFOLIO
-              </span>
-            </div>
           </div>
 
           <div className="title-sub">
@@ -342,17 +348,8 @@ export default function Projects() {
             </p>
           </div>
 
-          {/* Divider to first card */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-[30vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
-        </div>
-
-        {projects.map((p, i) => (
-          <ProjectCard key={p.id} project={p} index={i} />
-        ))}
-
-        {/* End spacer */}
-        <div className="w-[20vw] h-full shrink-0 flex items-center justify-center">
-          <div className="w-px h-[25vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
+          {/* Divider from last card */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-[30vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
         </div>
       </div>
     </section>

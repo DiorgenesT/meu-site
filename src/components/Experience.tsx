@@ -10,6 +10,7 @@ export default function Experience() {
   const headingRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const eduRef = useRef<HTMLDivElement>(null);
+  const eduBoxRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -151,6 +152,25 @@ export default function Experience() {
           scrollTrigger: { trigger: eduRef.current, start: 'top 85%' } }
       );
 
+      // ── Education card parallax (follows timeline scroll) ───
+      if (eduBoxRef.current && timelineRef.current) {
+        gsap.to(eduBoxRef.current, {
+          y: () => {
+            const tlH = timelineRef.current?.offsetHeight ?? 0;
+            const boxH = eduBoxRef.current?.offsetHeight ?? 0;
+            return Math.max(0, tlH - boxH);
+          },
+          ease: 'none',
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: 'top 65%',
+            end: 'bottom 65%',
+            scrub: 1.8,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -286,8 +306,7 @@ export default function Experience() {
 
           {/* Right: Education */}
           <div className="lg:col-span-4">
-            <div className="sticky top-32">
-              <div className="bento-box p-8">
+            <div ref={eduBoxRef} className="bento-box p-8">
                 <div className="flex items-center gap-3 mb-8">
                   <span className="font-mono text-[10px] text-accent tracking-widest uppercase">Histórico Acadêmico</span>
                   <div className="flex-1 h-[1px] bg-white/10" />
@@ -310,7 +329,6 @@ export default function Experience() {
                     </div>
                   ))}
                 </div>
-              </div>
             </div>
           </div>
 

@@ -1,9 +1,32 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { personalInfo, stats } from '../data/portfolio';
+import { personalInfo } from '../data/portfolio';
 import { MessageCircle, Download, MapPin, ExternalLink } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+
+const specialties = [
+  {
+    area: 'Frontend & UI',
+    stack: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
+    accent: '#00A3FF',
+  },
+  {
+    area: 'Backend & APIs',
+    stack: ['Python', 'FastAPI', 'Node.js', 'PostgreSQL', 'JWT'],
+    accent: '#E2E8F0',
+  },
+  {
+    area: 'Cloud & DevOps',
+    stack: ['Docker', 'Cloudflare', 'Vercel', 'CI/CD', 'GitHub Actions'],
+    accent: '#00A3FF',
+  },
+  {
+    area: 'Dados & Automação',
+    stack: ['Python', 'Pandas', 'Web Scraping', 'Pipelines', 'OpenAI'],
+    accent: '#E2E8F0',
+  },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +35,7 @@ export default function About() {
   const headingRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const bioRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
+  const specialtiesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -67,19 +90,13 @@ export default function About() {
           scrollTrigger: { trigger: bioRef.current, start: 'top 80%' } }
       );
 
-      // Stats counter
-      statsRef.current?.querySelectorAll('[data-value]').forEach((el) => {
-        const target = parseInt(el.getAttribute('data-value') || '0');
-        const suffix = el.getAttribute('data-suffix') || '';
-        const obj = { val: 0 };
-        ScrollTrigger.create({
-          trigger: statsRef.current, start: 'top 85%', once: true,
-          onEnter: () => gsap.to(obj, {
-            val: target, duration: 2, ease: 'power2.out',
-            onUpdate: () => { el.textContent = Math.floor(obj.val) + suffix; },
-          }),
-        });
-      });
+      // Specialties cards
+      const cards = specialtiesRef.current ? Array.from(specialtiesRef.current.children) : [];
+      gsap.fromTo(cards,
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: specialtiesRef.current, start: 'top 88%' } }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -229,17 +246,22 @@ export default function About() {
           </div>
         </div>
 
-        {/* Stats Strip */}
-        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          {stats.map((stat) => (
-            <div key={stat.label}
-              className="bento-box px-6 py-8 text-center group hover:-translate-y-1 transition-transform duration-300">
-              <div className="font-display font-bold text-4xl md:text-5xl text-accent mb-3 tabular-nums"
-                data-value={stat.value} data-suffix={stat.suffix}>
-                0{stat.suffix}
+        {/* Specialties Strip */}
+        <div ref={specialtiesRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+          {specialties.map((s) => (
+            <div key={s.area}
+              className="bento-box px-6 py-7 group hover:-translate-y-1 transition-transform duration-300 flex flex-col gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: s.accent, boxShadow: `0 0 8px ${s.accent}` }} />
+                <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted">{s.area}</span>
               </div>
-              <div className="font-mono text-[10px] text-muted tracking-widest uppercase leading-snug">
-                {stat.label}
+              <div className="flex flex-wrap gap-1.5">
+                {s.stack.map((tech) => (
+                  <span key={tech}
+                    className="px-2 py-0.5 rounded text-[10px] font-mono border border-white/8 bg-white/3 text-primary/50 group-hover:text-primary/70 group-hover:border-white/15 transition-colors duration-300">
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
