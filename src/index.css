@@ -5,9 +5,9 @@
 @tailwind utilities;
 
 :root {
-  --accent: #00D4FF; /* Deep tech cyan */
-  --bg: #050505;
-  --surface: rgba(20, 20, 25, 0.4);
+  --accent: #00D4FF;
+  --bg: #0D0D14;
+  --surface: rgba(22, 22, 34, 0.5);
 }
 
 * {
@@ -22,14 +22,14 @@
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb { background: #1a1a24; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #2a2a3a; }
+::-webkit-scrollbar-track { background: #0D0D14; }
+::-webkit-scrollbar-thumb { background: #22223A; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #32324E; }
 
 html { scroll-behavior: auto; }
 
 body {
-  background: #050505;
+  background: #0D0D14;
   color: #E2E8F0;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -47,7 +47,7 @@ body {
 
 /* ── Bento Box (Glassmorphism 2.0) ──────────────── */
 .bento-box {
-  background: rgba(15, 15, 20, 0.6);
+  background: rgba(20, 20, 32, 0.65);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -128,7 +128,7 @@ body {
   left: 0;
   right: 0;
   z-index: 99997;
-  background: #040406;
+  background: #0D0D14;
 }
 
 .loader-code {
@@ -157,7 +157,7 @@ section:not(#hero)::before {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 120px;
-  background: linear-gradient(to bottom, #050505 0%, transparent 100%);
+  background: linear-gradient(to bottom, #0D0D14 0%, transparent 100%);
   pointer-events: none;
   z-index: 5;
 }

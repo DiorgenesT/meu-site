@@ -125,7 +125,7 @@ export default function Skills() {
         {/* Bento Grid layout */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {SKILL_GROUPS.map((group, i) => (
-            <div key={i} className={`skill-node bento-box p-8 flex flex-col justify-between ${group.colSpan} border border-white/5 bg-[#050505]/80`}>
+            <div key={i} className={`skill-node bento-box p-8 flex flex-col justify-between ${group.colSpan} border border-white/5 bg-[#0D0D14]/80`}>
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-display font-medium text-xl text-primary uppercase tracking-wide">
@@ -151,7 +151,7 @@ export default function Skills() {
       </div>
 
       {/* Marquee Footnote */}
-      <div className="mt-32 py-6 border-y border-[var(--accent)]/10 bg-[#050505] overflow-hidden relative z-10">
+      <div className="mt-32 py-6 border-y border-[var(--accent)]/10 bg-[#0D0D14] overflow-hidden relative z-10">
         <div className="marquee-track flex gap-16 items-center">
           {[...techStack, ...techStack].map((t, i) => (
             <span key={i} className="flex-shrink-0 font-mono text-sm text-[var(--accent)]/50 uppercase tracking-widest hover:text-[var(--accent)] transition-colors duration-300 cursor-default whitespace-nowrap">

@@ -76,7 +76,7 @@ function Terminal() {
   return (
     <div
       ref={containerRef}
-      className="bento-box p-6 font-mono text-xs md:text-sm leading-relaxed w-full border border-white/5 bg-[#050505]/90 hover:border-white/10 transition-colors duration-300"
+      className="bento-box p-6 font-mono text-xs md:text-sm leading-relaxed w-full border border-white/5 bg-[#0D0D14]/90 hover:border-white/10 transition-colors duration-300"
     >
       {/* Terminal header bar */}
       <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/5">
@@ -218,7 +218,7 @@ export default function Hero() {
     <section ref={heroRef} id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
 
       {/* Curtain — covers hero on load, slides up to reveal */}
-      <div ref={curtainRef} className="absolute inset-0 bg-[#050505] z-[100] pointer-events-none" />
+      <div ref={curtainRef} className="absolute inset-0 bg-[#0D0D14] z-[100] pointer-events-none" />
 
       <div className="vignette" />
 

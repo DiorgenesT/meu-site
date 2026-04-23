@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#050505',
-        surface: '#0A0A0F',
-        surfaceHover: '#12121A',
+        background: '#0D0D14',
+        surface: '#13131E',
+        surfaceHover: '#1A1A28',
         accent: '#00A3FF',
         primary: '#E2E8F0',
         muted: '#64748B',

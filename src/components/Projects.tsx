@@ -10,7 +10,7 @@ const TITLE_CHARS = 'PROJETOS'.split('');
 
 function CodePreview({ project, accent }: { project: typeof projects[0]; accent: string }) {
   return (
-    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 bg-[#040406] group">
+    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 bg-[#0D0D14] group">
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
         style={{ background: `radial-gradient(circle at 30% 50%, ${accent}15 0%, transparent 65%)` }}
