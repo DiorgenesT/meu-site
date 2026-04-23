@@ -195,14 +195,14 @@ export default function Projects() {
         gsap.fromTo(sectionNum,
           { y: 60, opacity: 0 },
           { y: 0, opacity: 1, duration: 1.2, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 90%' } }
+            scrollTrigger: { trigger: containerRef.current, start: 'top 95%' } }
         );
       }
       if (sectionTitle) {
         gsap.fromTo(sectionTitle,
           { y: 40, opacity: 0 },
           { y: 0, opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.15,
-            scrollTrigger: { trigger: containerRef.current, start: 'top 90%' } }
+            scrollTrigger: { trigger: containerRef.current, start: 'top 95%' } }
         );
       }
 
@@ -213,7 +213,7 @@ export default function Projects() {
           { opacity: 0, y: 40 },
           {
             opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: 'power3.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 80%' },
+            scrollTrigger: { trigger: containerRef.current, start: 'top 93%' },
           }
         );
       }
@@ -224,7 +224,7 @@ export default function Projects() {
           { opacity: 0, y: 14 },
           {
             opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 76%' },
+            scrollTrigger: { trigger: containerRef.current, start: 'top 89%' },
           }
         );
       }
