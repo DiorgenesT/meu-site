@@ -89,18 +89,18 @@ export default function Skills() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="py-32 relative">
+    <section ref={sectionRef} id="skills" className="py-16 md:py-32 relative">
       <div className="absolute inset-0 bg-surface/30" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Section Header */}
-        <div ref={headingRef} className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+        <div ref={headingRef} className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-20">
 
-          <div className="section-bg-num absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
+          <div className="section-bg-num hidden md:block absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
             style={{ fontSize: 'clamp(100px, 18vw, 200px)', color: 'rgba(0,212,255,0.04)' }}>
             02
           </div>
-          <div className="section-bg-title absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
+          <div className="section-bg-title hidden md:block absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
             style={{ fontSize: 'clamp(70px, 12vw, 140px)', color: 'rgba(255,255,255,0.025)' }}>
             SKILLS
           </div>
@@ -151,7 +151,7 @@ export default function Skills() {
       </div>
 
       {/* Marquee Footnote */}
-      <div className="mt-32 py-6 border-y border-[var(--accent)]/10 bg-[#0D0D14] overflow-hidden relative z-10">
+      <div className="mt-16 md:mt-32 py-6 border-y border-[var(--accent)]/10 bg-[#0D0D14] overflow-hidden relative z-10">
         <div className="marquee-track flex gap-16 items-center">
           {[...techStack, ...techStack].map((t, i) => (
             <span key={i} className="flex-shrink-0 font-mono text-sm text-[var(--accent)]/50 uppercase tracking-widest hover:text-[var(--accent)] transition-colors duration-300 cursor-default whitespace-nowrap">

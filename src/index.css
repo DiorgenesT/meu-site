@@ -150,9 +150,13 @@ body {
 section { position: relative; overflow: hidden; }
 section:last-child { overflow: visible; }
 
+@media (min-width: 768px) {
+  .process-panel { min-width: clamp(340px, 84vw, 72vw); }
+}
+
 /* ── Section fade edges ─────────────────────────── */
 /* Subtle gradient at top of each section blends with background */
-section:not(#hero)::before {
+section:not(#hero):not(#projects)::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -247,6 +251,23 @@ html {
   text-transform: uppercase;
   pointer-events: none;
   z-index: 100;
+}
+
+/* ── Navbar & Mobile Menu ───────────────────────── */
+@keyframes navEntrance {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.nav-entrance {
+  animation: navEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes menuSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mobile-menu-enter {
+  animation: menuSlideDown 0.2s ease-out both;
 }
 
 /* ── Film Grain Noise ──────────────────────────── */

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { personalInfo } from '../data/portfolio';
-import { MessageCircle, Download, MapPin, ExternalLink } from 'lucide-react';
+import { MessageCircle, MapPin, ExternalLink } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const specialties = [
@@ -103,17 +103,17 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-32 relative">
+    <section ref={sectionRef} id="about" className="py-16 md:py-32 relative">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}
-        <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20" ref={headingRef}>
+        <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-20" ref={headingRef}>
 
-          <div className="section-bg-num absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
+          <div className="section-bg-num hidden md:block absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
             style={{ fontSize: 'clamp(100px, 18vw, 200px)', color: 'rgba(0,212,255,0.04)' }}>
             01
           </div>
-          <div className="section-bg-title absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
+          <div className="section-bg-title hidden md:block absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
             style={{ fontSize: 'clamp(70px, 12vw, 140px)', color: 'rgba(255,255,255,0.025)' }}>
             ABOUT
           </div>
@@ -183,10 +183,6 @@ export default function About() {
                 <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-primary text-sm font-medium transition-all duration-300">
                   <FaLinkedinIn className="text-base" /> LinkedIn <ExternalLink className="w-3 h-3 ml-1 opacity-50" />
-                </a>
-                <a href="/cv.pdf" download
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent/10 border border-accent/20 hover:bg-accent hover:text-background text-accent text-sm font-medium transition-all duration-300">
-                  <Download className="w-4 h-4" /> Curriculum Vitae
                 </a>
               </div>
             </div>

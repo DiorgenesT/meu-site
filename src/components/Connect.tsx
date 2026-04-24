@@ -53,7 +53,7 @@ export default function Connect() {
   const titleChars = titleWords.map(w => w.split(''));
 
   return (
-    <section ref={sectionRef} id="connect" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-32 bg-black">
+    <section ref={sectionRef} id="connect" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-16 md:py-32 bg-black">
 
       <div className="absolute inset-0 grid-bg opacity-10 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55vw] h-[55vw] bg-green-500/4 rounded-full blur-[130px] pointer-events-none" />
@@ -96,7 +96,7 @@ export default function Connect() {
               href={personalInfo.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-5 px-14 py-7 rounded-full bg-white text-black font-display font-bold text-xl tracking-tight overflow-hidden"
+              className="group relative inline-flex items-center gap-4 md:gap-5 px-8 py-5 md:px-14 md:py-7 rounded-full bg-white text-black font-display font-bold text-base md:text-xl tracking-tight overflow-hidden"
             >
               {/* Hover fill slide-in */}
               <span className="absolute inset-0 bg-green-400 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />

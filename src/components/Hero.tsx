@@ -285,7 +285,7 @@ export default function Hero() {
                 Ver Sistemas
               </button>
 
-              <div className="flex items-center gap-4 ml-4">
+              <div className="flex items-center gap-4">
                 {[
                   { icon: FaWhatsapp, href: personalInfo.whatsapp, label: 'WhatsApp' },
                   { icon: FaInstagram, href: personalInfo.instagram, label: 'Instagram' },
@@ -309,7 +309,7 @@ export default function Hero() {
             <Terminal />
 
             {/* Overlay Decorative Badge */}
-            <div className="absolute -bottom-6 -right-6 bento-box px-5 py-4 flex items-center gap-3 bg-background/40 backdrop-blur-3xl border border-white/10 z-20 shadow-2xl">
+            <div className="absolute bottom-2 right-2 sm:-bottom-6 sm:-right-6 bento-box px-4 py-3 sm:px-5 sm:py-4 flex items-center gap-3 bg-background/40 backdrop-blur-3xl border border-white/10 z-20 shadow-2xl">
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />

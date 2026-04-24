@@ -6,8 +6,6 @@ import { ExternalLink, Github, Terminal as TerminalIcon } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TITLE_CHARS = 'PROJETOS'.split('');
-
 function CodePreview({ project, accent }: { project: typeof projects[0]; accent: string }) {
   return (
     <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 bg-[#0D0D14] group">
@@ -101,12 +99,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   const accent = index % 2 === 0 ? '#00A3FF' : '#E2E8F0';
 
   return (
-    <div className="project-card relative flex flex-col md:flex-row h-full w-[88vw] md:w-[72vw] lg:w-[62vw] shrink-0 gap-10 md:gap-14 items-center justify-center px-8 md:px-16">
-
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] font-display font-bold"
-        style={{ fontSize: 'clamp(120px, 22vw, 260px)', lineHeight: 1, color: accent }}>
-        {String(index + 1).padStart(2, '0')}
-      </div>
+    <div className="project-card relative flex flex-col md:flex-row h-auto md:h-full w-full md:w-[72vw] lg:w-[62vw] md:shrink-0 gap-8 md:gap-14 items-start md:items-center justify-center px-0 md:px-16">
 
       <div className="w-full md:w-[45%] shrink-0">
         <CodePreview project={project} accent={accent} />
@@ -124,14 +117,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted/50">EM_PRODUÇÃO</span>
         </div>
 
-        <div className="overflow-hidden">
-          <h3
-            className="card-title-inner font-display font-bold leading-[1.05] tracking-tight text-primary"
-            style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)' }}
-          >
-            {project.title}
-          </h3>
-        </div>
+        <h3
+          className="font-display font-bold leading-[1.05] tracking-tight text-primary"
+          style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)' }}
+        >
+          {project.title}
+        </h3>
 
         <p className="text-muted/80 text-sm md:text-base leading-relaxed max-w-xs md:max-w-sm font-light">
           {project.description}
@@ -184,48 +175,26 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export default function Projects() {
   const containerRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Section bg number + title
-      const sectionNum = scrollRef.current?.querySelector('.section-bg-num');
-      const sectionTitle = scrollRef.current?.querySelector('.section-bg-title');
+      // Section bg number + title (now in headingRef, not scrollRef)
+      const sectionNum = headingRef.current?.querySelector('.section-bg-num');
+      const sectionTitle = headingRef.current?.querySelector('.section-bg-title');
       if (sectionNum) {
         gsap.fromTo(sectionNum,
           { y: 60, opacity: 0 },
           { y: 0, opacity: 1, duration: 1.2, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 110%' } }
+            scrollTrigger: { trigger: containerRef.current, start: 'top 90%' } }
         );
       }
       if (sectionTitle) {
         gsap.fromTo(sectionTitle,
           { y: 40, opacity: 0 },
           { y: 0, opacity: 1, duration: 1.4, ease: 'power2.out', delay: 0.15,
-            scrollTrigger: { trigger: containerRef.current, start: 'top 110%' } }
-        );
-      }
-
-      // Title chars — always animate regardless of scroll amount
-      const titleChars = scrollRef.current?.querySelectorAll('.title-char');
-      if (titleChars?.length) {
-        gsap.fromTo(titleChars,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: 'power3.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 108%' },
-          }
-        );
-      }
-
-      const titleSub = scrollRef.current?.querySelector('.title-sub');
-      if (titleSub) {
-        gsap.fromTo(titleSub,
-          { opacity: 0, y: 14 },
-          {
-            opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 104%' },
-          }
+            scrollTrigger: { trigger: containerRef.current, start: 'top 90%' } }
         );
       }
 
@@ -234,35 +203,9 @@ export default function Projects() {
       const amountToScroll = Math.max(0, scrollWidth - viewportWidth);
       if (amountToScroll <= 0) return;
 
-      // Set initial position to far right (heading panel is the last flex child)
-      gsap.set(scrollRef.current, { x: -amountToScroll });
-
-      // Card title reveals — reversed scroll: cards appear from the left side
-      const cards = Array.from(scrollRef.current?.querySelectorAll('.project-card') || []);
-      cards.forEach((card) => {
-        const titleEl = card.querySelector('.card-title-inner') as HTMLElement | null;
-        if (!titleEl) return;
-        const cardEl = card as HTMLElement;
-        // In reversed scroll, card center reaches viewport center at this scroll offset
-        const triggerAt = Math.max(
-          0,
-          amountToScroll - cardEl.offsetLeft - cardEl.offsetWidth / 2 + viewportWidth / 2
-        );
-
-        gsap.set(titleEl, { yPercent: 110 });
-        gsap.to(titleEl, {
-          yPercent: 0, duration: 0.55, ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: `top+=${triggerAt} top`,
-            once: true,
-          },
-        });
-      });
-
-      // Horizontal scroll — reversed: from x=-amountToScroll back to x=0
+      // Horizontal scroll — natural: left to right (x: 0 → -amountToScroll)
       gsap.to(scrollRef.current, {
-        x: 0,
+        x: -amountToScroll,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -281,77 +224,67 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={containerRef} id="projects" className="relative h-screen bg-transparent overflow-hidden">
+    <section ref={containerRef} id="projects" className="relative overflow-hidden flex flex-col md:h-screen">
 
-      {/* HUD elements */}
-      <div className="absolute bottom-10 left-10 z-30 pointer-events-none">
-        <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-accent/30">
-          {projects.length.toString().padStart(2, '0')}_PROJETOS // TODOS_EM_PROD
-        </span>
-      </div>
-      <div className="absolute top-10 right-10 z-30 pointer-events-none flex items-center gap-3">
-        <div className="w-1.5 h-1.5 rounded-full bg-green-400/60 animate-pulse" />
-        <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/20">
-          STATUS_ONLINE
-        </span>
-      </div>
+      {/* pt-16 on md+ so section-bg-num (-top-10) stays within section bounds */}
+      <div className="pt-8 md:pt-16 shrink-0">
+        <div ref={headingRef} className="relative max-w-7xl mx-auto px-6 pb-6">
 
-      <div
-        ref={scrollRef}
-        className="flex h-full items-center"
-        style={{ width: 'fit-content' }}
-      >
-        {/* Start spacer */}
-        <div className="w-[20vw] h-full shrink-0 flex items-center justify-center">
-          <div className="w-px h-[25vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
-        </div>
-
-        {projects.map((p, i) => (
-          <ProjectCard key={p.id} project={p} index={i} />
-        ))}
-
-        {/* Heading panel — last, revealed as scroll destination */}
-        <div
-          className="relative flex flex-col justify-center h-full shrink-0 px-[8vw] md:px-[10vw]"
-          style={{ minWidth: 'clamp(320px, 72vw, 60vw)' }}
-        >
-          <div className="section-bg-num absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none"
-            style={{ fontSize: 'clamp(100px, 18vw, 200px)', color: 'rgba(0,212,255,0.04)', opacity: 0 }}>
+          <div className="section-bg-num hidden md:block absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
+            style={{ fontSize: 'clamp(100px, 18vw, 200px)', color: 'rgba(0,212,255,0.04)' }}>
             04
           </div>
-          <div className="section-bg-title absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
+          <div className="section-bg-title hidden md:block absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
             style={{ fontSize: 'clamp(70px, 12vw, 140px)', color: 'rgba(255,255,255,0.025)' }}>
             PROJECTS
           </div>
 
-          <div className="flex items-center gap-4 mb-6">
-            <span className="font-mono text-xs text-accent font-medium">04.</span>
-            <span className="font-mono text-xs text-muted tracking-[0.2em] uppercase">Projects</span>
-          </div>
-
-          <div className="mb-5 overflow-hidden">
-            <div
-              className="font-display font-bold tracking-tight leading-[0.9]"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
-            >
-              {TITLE_CHARS.map((char, i) => (
-                <span key={i} className="inline-block overflow-hidden align-bottom" style={{ lineHeight: 1.1 }}>
-                  <span className="title-char inline-block">{char}</span>
-                </span>
-              ))}
+          <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-4 mb-6">
+                <span className="font-mono text-xs text-accent font-medium">04.</span>
+                <span className="font-mono text-xs text-muted tracking-[0.2em] uppercase">Projects</span>
+                <div className="w-16 h-[1px] bg-white/10" />
+              </div>
+            </div>
+            <div className="title-sub">
+              <p className="font-mono text-[11px] text-muted/50 tracking-[0.15em] uppercase pb-1">
+                Sistemas reais — entregues em produção
+              </p>
             </div>
           </div>
 
-          <div className="title-sub">
-            <p className="font-mono text-[11px] text-muted/50 tracking-[0.15em] uppercase">
-              Sistemas reais — entregues em produção
-            </p>
-          </div>
-
-          {/* Divider from last card */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-[30vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
         </div>
       </div>
+
+      {/* Mobile: vertical card grid */}
+      <div className="md:hidden px-4 sm:px-6 pb-16 space-y-6">
+        {projects.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} />
+        ))}
+      </div>
+
+      {/* Desktop: horizontal scroll area */}
+      <div className="hidden md:flex flex-1 min-h-0 overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="flex h-full items-center"
+          style={{ width: 'fit-content' }}
+        >
+          <div className="w-[10vw] h-full shrink-0 flex items-center justify-center">
+            <div className="w-px h-[25vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
+          </div>
+
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
+
+          <div className="w-[10vw] h-full shrink-0 flex items-center justify-center">
+            <div className="w-px h-[25vh] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }

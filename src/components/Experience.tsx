@@ -177,7 +177,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="py-32 relative overflow-hidden">
+    <section ref={sectionRef} id="experience" className="py-16 md:py-32 relative overflow-hidden">
 
       {/* HUD elements */}
       <div className="absolute top-10 right-10 z-10 pointer-events-none">
@@ -189,14 +189,14 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}
-        <div ref={headingRef} className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
+        <div ref={headingRef} className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-24">
 
           {/* Background number */}
-          <div className="section-bg-num absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
+          <div className="section-bg-num hidden md:block absolute -left-4 -top-10 select-none pointer-events-none font-display font-bold leading-none opacity-0"
             style={{ fontSize: 'clamp(100px, 18vw, 200px)', color: 'rgba(0,212,255,0.04)' }}>
             03
           </div>
-          <div className="section-bg-title absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
+          <div className="section-bg-title hidden md:block absolute right-0 -top-6 select-none pointer-events-none font-display font-bold leading-none opacity-0 text-right"
             style={{ fontSize: 'clamp(70px, 12vw, 140px)', color: 'rgba(255,255,255,0.025)' }}>
             EXPERIENCE
           </div>

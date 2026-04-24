@@ -180,7 +180,9 @@ function revealPanel(panel: Element, masterTl: gsap.core.Timeline, base: number)
   const headlineEl = panel.querySelector('.headline-reveal');
   const bodyEl = panel.querySelector('.body-reveal');
   const svgEls = panel.querySelectorAll('.svg-draw');
+  const bgIcon = panel.querySelector('.bg-icon-shadow');
 
+  if (bgIcon) masterTl.fromTo(bgIcon, { opacity: 0, scale: 1.15 }, { opacity: 0.03, scale: 1, duration: 0.65, ease: 'power2.out' }, base - 0.2);
   if (wordEl) masterTl.fromTo(wordEl, { yPercent: 115 }, { yPercent: 0, duration: 0.45, ease: 'power3.out' }, base);
   if (headlineEl) masterTl.fromTo(headlineEl, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, base + 0.15);
   if (bodyEl) masterTl.fromTo(bodyEl, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, base + 0.25);
@@ -193,14 +195,37 @@ export default function Philosophy() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const scrollWidth = scrollRef.current?.offsetWidth || 0;
+      const scrollWidth = scrollRef.current?.scrollWidth || 0;
       const viewportWidth = window.innerWidth;
       const amountToScroll = Math.max(0, scrollWidth - viewportWidth);
-      if (amountToScroll <= 0) return;
 
       const panels = Array.from(containerRef.current?.querySelectorAll('.process-panel') ?? []);
 
-      // Panel 1 reveals before pin
+      if (amountToScroll <= 0) {
+        // Mobile: reveal each panel individually as it enters viewport
+        panels.forEach((panel) => {
+          const bgIcon = panel.querySelector('.bg-icon-shadow');
+          const wordEl = panel.querySelector('.word-reveal-inner');
+          const headlineEl = panel.querySelector('.headline-reveal');
+          const bodyEl = panel.querySelector('.body-reveal');
+          const svgEls = panel.querySelectorAll('.svg-draw');
+
+          if (wordEl) gsap.set(wordEl, { yPercent: 115 });
+          if (headlineEl) gsap.set(headlineEl, { y: 22, opacity: 0 });
+          if (bodyEl) gsap.set(bodyEl, { y: 22, opacity: 0 });
+          if (bgIcon) gsap.set(bgIcon, { opacity: 0 });
+
+          const tl = gsap.timeline({ scrollTrigger: { trigger: panel, start: 'top 85%' } });
+          if (bgIcon) tl.to(bgIcon, { opacity: 0.03, duration: 0.4 }, 0);
+          if (wordEl) tl.fromTo(wordEl, { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: 'power3.out' }, 0);
+          if (headlineEl) tl.fromTo(headlineEl, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+          if (bodyEl) tl.fromTo(bodyEl, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+          if (svgEls.length) tl.to(svgEls, { strokeDashoffset: 0, duration: 0.7, stagger: 0.08 }, '-=0.3');
+        });
+        return;
+      }
+
+      // Desktop: panel 1 reveals before pin
       const panel1 = panels[0];
       if (panel1) {
         const wordEl1 = panel1.querySelector('.word-reveal-inner');
@@ -218,6 +243,8 @@ export default function Philosophy() {
         if (headEl1) tl1.fromTo(headEl1, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
         if (bodyEl1) tl1.fromTo(bodyEl1, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
         if (svgEls1.length) tl1.to(svgEls1, { strokeDashoffset: 0, duration: 0.7, stagger: 0.08 }, '-=0.3');
+        const bgIcon1 = panel1.querySelector('.bg-icon-shadow');
+        if (bgIcon1) tl1.fromTo(bgIcon1, { opacity: 0, scale: 1.15 }, { opacity: 0.03, scale: 1, duration: 0.55, ease: 'power2.out' }, '-=0.5');
       }
 
       const masterTl = gsap.timeline({
@@ -251,14 +278,14 @@ export default function Philosophy() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen bg-transparent overflow-hidden">
+    <section ref={containerRef} className="relative bg-transparent overflow-hidden">
 
-      <div className="absolute top-10 left-10 z-30 pointer-events-none">
+      <div className="absolute top-10 left-10 z-30 pointer-events-none hidden md:block">
         <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-accent/40">
           FLUXO_DE_TRABALHO // DO_CONCEITO_AO_PROD
         </span>
       </div>
-      <div className="absolute bottom-10 right-10 z-30 pointer-events-none flex items-center gap-3">
+      <div className="absolute bottom-10 right-10 z-30 pointer-events-none hidden md:flex items-center gap-3">
         <div className="w-6 h-px bg-white/10" />
         <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/25">
           {steps.length.toString().padStart(2, '0')}_ETAPAS
@@ -267,8 +294,7 @@ export default function Philosophy() {
 
       <div
         ref={scrollRef}
-        className="flex h-full items-center"
-        style={{ width: 'fit-content' }}
+        className="flex flex-col md:flex-row md:h-screen md:items-center w-full md:w-max"
       >
         {steps.map((step, i) => {
           const SvgComp = svgMap[step.svg as keyof typeof svgMap];
@@ -276,23 +302,20 @@ export default function Philosophy() {
           return (
             <div
               key={step.id}
-              className="process-panel relative flex flex-col justify-center h-full px-[8vw] md:px-[7vw]"
-              style={{ minWidth: 'clamp(340px, 84vw, 72vw)' }}
+              className="process-panel relative flex flex-col justify-center w-full md:w-auto md:h-full px-6 md:px-[8vw] lg:px-[7vw] py-14 md:py-0"
             >
-              {/* Faint background number */}
+              {/* Background icon shadow — forms on scroll */}
               <div
-                className="absolute right-8 top-1/2 -translate-y-1/2 select-none pointer-events-none font-display font-bold leading-none"
-                style={{ fontSize: 'clamp(110px, 17vw, 190px)', color: step.color, opacity: 0.028 }}
+                className="bg-icon-shadow absolute inset-0 flex items-center justify-end overflow-hidden select-none pointer-events-none"
+                style={{ color: step.color, opacity: 0, paddingRight: '6vw' }}
               >
-                {step.id}
+                <div style={{ transform: 'scale(4)', transformOrigin: 'right center' }}>
+                  <SvgComp />
+                </div>
               </div>
 
               {/* Meta */}
               <div className="flex items-center gap-4 mb-10 opacity-50">
-                <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: step.color }}>
-                  {step.id}
-                </span>
-                <div className="w-8 h-px" style={{ background: step.color }} />
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted">
                   {step.code}
                 </span>

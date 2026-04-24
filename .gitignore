@@ -7,6 +7,10 @@ dist/
 # TypeScript build cache
 *.tsbuildinfo
 
+# TypeScript composite emit (vite.config.ts → vite.config.js/.d.ts)
+vite.config.js
+vite.config.d.ts
+
 # Environment
 .env
 .env.local
