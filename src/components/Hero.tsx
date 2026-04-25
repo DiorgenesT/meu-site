@@ -34,42 +34,84 @@ function Terminal() {
   }, []);
 
   const getLineMarkup = (text: string) => {
-    if (text.includes('const ')) {
+    if (text === '') return null;
+
+    // "class Developer:"
+    if (text.startsWith('class ')) {
+      const name = text.slice(6).replace(':', '');
       return (
         <>
-          <span className="text-muted">const </span>
-          <span className="text-[var(--accent)]">developer</span>
-          <span className="text-primary"> = {'{'}</span>
+          <span className="text-purple-400">class </span>
+          <span className="text-[var(--accent)]">{name}</span>
+          <span className="text-muted">:</span>
         </>
       );
     }
-    if (text === '};') return <span className="text-primary">{'};'}</span>;
-    if (text === '') return null;
-    if (text.includes('// ✓')) {
-      const [code, comment] = text.split('//');
+
+    // "    def build(self): return '...'"
+    if (text.startsWith('    def ')) {
+      const body = text.trim().slice(4); // remove "def "
+      const colonIdx = body.indexOf(':');
+      const sig = body.slice(0, colonIdx);
+      const ret = body.slice(colonIdx + 1).trim();
+      return (
+        <>
+          <span className="text-muted opacity-40">{'    '}</span>
+          <span className="text-purple-400">def </span>
+          <span className="text-[var(--accent)]">{sig}</span>
+          <span className="text-muted">: </span>
+          <span className="text-primary/60">{ret}</span>
+        </>
+      );
+    }
+
+    // "    key = value" (indented assignment)
+    if (text.startsWith('    ')) {
+      const eqIdx = text.indexOf('=');
+      if (eqIdx !== -1) {
+        const key = text.slice(0, eqIdx).trim();
+        const val = text.slice(eqIdx + 1).trim();
+        const isBool = val === 'True' || val === 'False';
+        return (
+          <>
+            <span className="text-muted opacity-40">{'    '}</span>
+            <span className="text-primary/80">{key}</span>
+            <span className="text-muted"> = </span>
+            <span className={isBool ? 'text-orange-400' : 'text-[var(--accent)]/90'}>{val}</span>
+          </>
+        );
+      }
+    }
+
+    // "DG.build()  # ✓ ..." or any line with "# ✓"
+    if (text.includes('# ✓')) {
+      const hashIdx = text.indexOf('#');
+      const code = text.slice(0, hashIdx);
+      const comment = text.slice(hashIdx + 1).trim();
       return (
         <>
           <span className="text-[var(--accent)]">{code}</span>
-          <span className="text-muted pl-2">{'// '}</span>
-          <span className="text-green-400">{comment.trim()}</span>
+          <span className="text-muted">{'# '}</span>
+          <span className="text-green-400">{comment}</span>
           <span className="terminal-cursor inline-block w-1.5 h-3 bg-[var(--accent)] animate-pulse ml-1" />
         </>
       );
     }
-    if (text.startsWith('  ')) {
-      const colonIdx = text.indexOf(':');
-      const key = text.slice(0, colonIdx).trim();
-      const val = text.slice(colonIdx + 1).trim().replace(/,$/, '');
+
+    // "DG = Developer()" top-level assignment
+    if (text.includes(' = ')) {
+      const eqIdx = text.indexOf(' = ');
+      const varName = text.slice(0, eqIdx);
+      const val = text.slice(eqIdx + 3);
       return (
         <>
-          <span className="text-muted opacity-50">&nbsp;&nbsp;</span>
-          <span className="text-primary/80">{key}</span>
-          <span className="text-muted">: </span>
-          <span className="text-[var(--accent)]/90">{val}</span>
-          <span className="text-muted">,</span>
+          <span className="text-primary/80">{varName}</span>
+          <span className="text-muted"> = </span>
+          <span className="text-[var(--accent)]">{val}</span>
         </>
       );
     }
+
     return <span className="text-muted">{text}</span>;
   };
 
@@ -308,16 +350,6 @@ export default function Hero() {
           <div ref={terminalRef} className="lg:col-span-5 relative group">
             <Terminal />
 
-            {/* Overlay Decorative Badge */}
-            <div className="absolute bottom-2 right-2 sm:-bottom-6 sm:-right-6 bento-box px-4 py-3 sm:px-5 sm:py-4 flex items-center gap-3 bg-background/40 backdrop-blur-3xl border border-white/10 z-20 shadow-2xl">
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-green-400 text-[11px] font-mono tracking-widest">build passing</span>
-                </div>
-                <span className="text-muted/40 text-[10px] font-mono tracking-widest pl-3.5">v2026 · stable</span>
-              </div>
-            </div>
           </div>
 
         </div>

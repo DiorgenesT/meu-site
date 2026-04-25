@@ -1,9 +1,9 @@
 export const personalInfo = {
   name: "Diorgenes George",
   initials: "DG",
-  role: "Engenheiro / Desenvolvedor de Software",
-  tagline: "Transformo processos administrativos e operacionais complexos em sistemas digitais robustos e escaláveis.",
-  bio: "Desenvolvedor full stack na Fundação Beta (Prefeitura de Betim), especializado em digitalização de processos governamentais. Combino TypeScript e Python para eliminar papel, planilhas e ineficiências — construindo sistemas que as pessoas realmente usam.",
+  role: "Python Developer · Backend & AI Engineer",
+  tagline: "Construo sistemas backend com Python que entregam em produção — de APIs de alta demanda a pipelines de IA com LLMs e agentes autônomos.",
+  bio: "Desenvolvedor Python com sistemas rodando em produção no setor público e privado. Na Fundação Beta (Prefeitura de Betim), arquitetei APIs consumidas por dezenas de milhares de acessos mensais. No lado privado, integro LLMs, RAG e agentes inteligentes em produtos reais — não apenas protótipos. Minha vantagem: entendo o problema de negócio antes de abrir o editor, e entrego código que outras pessoas conseguem manter.",
   location: "Betim, Minas Gerais",
   email: "dg@email.com",
   github: "https://github.com/DiorgenesT",
@@ -13,49 +13,49 @@ export const personalInfo = {
   available: true,
 };
 
-// Curated tech stack — sênior não lista tudo, lista o que importa
 export const skills = [
-  { name: "TypeScript", category: "frontend", level: 92 },
-  { name: "React / Next.js", category: "frontend", level: 90 },
-  { name: "Python / FastAPI", category: "backend", level: 88 },
-  { name: "Tailwind CSS", category: "frontend", level: 90 },
-  { name: "PostgreSQL", category: "database", level: 82 },
-  { name: "Docker & CI/CD", category: "devops", level: 78 },
-  { name: "Web Scraping", category: "backend", level: 85 },
-  { name: "GSAP / Animações", category: "frontend", level: 82 },
+  { name: "Python / FastAPI", category: "backend", level: 93 },
+  { name: "LLMs & AI Agents", category: "ai", level: 84 },
+  { name: "AWS (Lambda · S3 · Bedrock)", category: "cloud", level: 80 },
+  { name: "RAG / LangChain", category: "ai", level: 82 },
+  { name: "PostgreSQL / pgvector", category: "database", level: 85 },
+  { name: "Docker & CI/CD", category: "devops", level: 82 },
+  { name: "TypeScript / React", category: "frontend", level: 90 },
+  { name: "Web Scraping / Automação", category: "backend", level: 88 },
 ];
 
 export const techStack = [
-  "TypeScript", "Python", "React", "Next.js", "FastAPI",
-  "PostgreSQL", "Docker", "Tailwind CSS", "GSAP",
-  "Vercel", "Cloudflare", "Supabase", "Git / GitHub", "CI/CD", "Vite",
+  "Python", "FastAPI", "AWS", "LangChain", "LLMs", "RAG",
+  "AI Agents", "OpenAI API", "Anthropic API", "PostgreSQL", "pgvector",
+  "Docker", "TypeScript", "React", "Next.js", "Cloudflare",
+  "Supabase", "CI/CD", "Git / GitHub",
 ];
 
 export const experience = [
   {
-    role: "Analista Sênior · Engenheiro de Software",
+    role: "Engenheiro de Software · Python & AI",
     company: "Fundação Beta",
     companyDetail: "Inovação & Tecnologia — Prefeitura de Betim",
     period: "nov 2025 — Presente",
-    description: "Desenvolvimento de sistemas para digitalização de processos da administração pública. Zero papel, zero planilhas — fluxos modernos com Next.js, FastAPI e PostgreSQL integrados a sistemas legados.",
-    tech: ["TypeScript", "Next.js", "Python", "FastAPI", "PostgreSQL", "Docker"],
+    description: "Arquitetura de APIs Python/FastAPI para digitalização da administração pública de Betim — portais com dezenas de milhares de acessos mensais. Integração de LLMs para automação de processos e classificação inteligente de dados. Sistemas substituindo papel, planilhas e fluxos manuais por APIs REST com PostgreSQL e workers Cloudflare.",
+    tech: ["Python", "FastAPI", "LLMs", "PostgreSQL", "TypeScript", "Cloudflare Workers", "Docker"],
     isCurrentJob: true,
   },
   {
-    role: "Gerente de Atendimento",
+    role: "Gerente de Atendimento → Dev Python",
     company: "Monumental Assistência 24hrs",
     companyDetail: "",
     period: "nov 2021 — nov 2025",
-    description: "Liderança de equipe de atendimento ao cliente. Período em que migrei para tecnologia: automatizei relatórios com Python, estruturei dashboards de métricas e desenvolvi ferramentas internas que reduziram o tempo de atendimento em 35%.",
-    tech: ["Python", "Automação", "Liderança", "Data Analysis"],
+    description: "Gestão de equipe onde dei início à transição para tecnologia: automatizei operações críticas com Python, construí dashboards de métricas e reduzi o tempo de atendimento em 35% com ferramentas internas. Primeiro contato prático com LLMs para automação de triagem e análise de dados em volume.",
+    tech: ["Python", "Automação", "Data Analysis", "LLMs"],
     isCurrentJob: false,
   },
   {
-    role: "Gerente de Atendimento",
+    role: "Gerente de Operações",
     company: "Expresso Truck",
     companyDetail: "",
     period: "jul 2014 — set 2020",
-    description: "Gestão de operações logísticas. Base sólida em processos, prazos e resolução de problemas sob pressão — habilidades que hoje aplicam diretamente em desenvolvimento de software.",
+    description: "Gestão de operações logísticas de alta pressão. Formou a base para entender processos de negócio antes de codificar — habilidade que diferencia um dev que entrega de um que apenas implementa requisitos.",
     tech: ["Gestão de Processos", "Logística", "Operações"],
     isCurrentJob: false,
   },
@@ -124,21 +124,23 @@ export const projects = [
 ];
 
 export const stats = [
-  { value: 5, suffix: "+", label: "Anos de Experiência" },
+  { value: 5, suffix: "+", label: "Anos em Produção" },
   { value: 30, suffix: "+", label: "Sistemas Entregues" },
-  { value: 100, suffix: "%", label: "Digital — Zero Papel" },
+  { value: 35, suffix: "%", label: "Redução de Tempo Operacional" },
   { value: 2, suffix: "x", label: "Formações em TI" },
 ];
 
 export const terminalLines = [
-  { text: "const developer = {" },
-  { text: '  name: "Diorgenes George",' },
-  { text: '  alias: "DG",' },
-  { text: "  role: 'Engenheiro de Software'," },
-  { text: "  stack: ['TypeScript', 'Python', 'Next.js']," },
-  { text: "  focus: 'digitalização de processos'," },
-  { text: "  available: true," },
-  { text: "};" },
+  { text: "class Developer:" },
+  { text: '    name = "Diorgenes George"' },
+  { text: '    alias = "DG"' },
+  { text: "    core_language = 'Python'" },
+  { text: "    stack = ['FastAPI', 'AWS', 'LangChain', 'PostgreSQL']" },
+  { text: "    expertise = ['LLMs', 'AI Agents', 'RAG', 'Backend APIs']" },
+  { text: "    available = True" },
   { text: "" },
-  { text: "DG.build(); // ✓ Online" },
+  { text: "    def build(self): return 'sistemas que pensam'" },
+  { text: "" },
+  { text: "DG = Developer()" },
+  { text: "DG.build()  # ✓ em produção" },
 ];

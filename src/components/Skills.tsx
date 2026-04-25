@@ -7,27 +7,27 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SKILL_GROUPS = [
   {
-    title: 'Core Stack',
-    desc: 'Linguagens & Ecossistema Principal',
-    skills: ['TypeScript', 'Python', 'React / Next.js', 'FastAPI'],
+    title: 'Python Core',
+    desc: 'Linguagem principal — backend de produção',
+    skills: ['Python', 'FastAPI', 'Pydantic / async', 'TypeScript'],
     colSpan: 'md:col-span-2'
   },
   {
-    title: 'Infra & Data',
-    desc: 'Banco de Dados, Cloud & DevOps',
-    skills: ['PostgreSQL', 'Docker', 'Vercel', 'AWS / Cloudflare'],
+    title: 'AI & LLMs',
+    desc: 'Inteligência aplicada a sistemas reais',
+    skills: ['LangChain / RAG', 'AI Agents', 'OpenAI · Anthropic API', 'pgvector'],
+    colSpan: 'md:col-span-1'
+  },
+  {
+    title: 'Cloud & Infra',
+    desc: 'AWS, containers e deploy contínuo',
+    skills: ['AWS (Lambda · S3 · Bedrock)', 'Docker', 'CI/CD', 'Cloudflare Workers'],
     colSpan: 'md:col-span-1'
   },
   {
     title: 'Data & Automação',
-    desc: 'Processamento, Raspagem & Pipelines',
-    skills: ['Web Scraping', 'Pandas / NumPy', 'Playwright', 'Beautiful Soup'],
-    colSpan: 'md:col-span-1'
-  },
-  {
-    title: 'Design Engine',
-    desc: 'Interface & Animações UI/UX',
-    skills: ['Tailwind CSS', 'GSAP', 'Framer Motion', 'UI Architecture'],
+    desc: 'Pipelines, raspagem e análise de dados',
+    skills: ['PostgreSQL / pgvector', 'Pandas / Polars', 'Web Scraping', 'Playwright'],
     colSpan: 'md:col-span-2'
   }
 ];

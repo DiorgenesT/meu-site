@@ -7,24 +7,29 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const specialties = [
   {
-    area: 'Frontend & UI',
-    stack: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
+    area: 'Python & Backend',
+    stack: ['Python', 'FastAPI', 'Pydantic', 'PostgreSQL', 'TypeScript'],
     accent: '#00A3FF',
   },
   {
-    area: 'Backend & APIs',
-    stack: ['Python', 'FastAPI', 'Node.js', 'PostgreSQL', 'JWT'],
+    area: 'AI & LLMs',
+    stack: ['LangChain', 'RAG', 'AI Agents', 'OpenAI API', 'Anthropic API'],
     accent: '#E2E8F0',
   },
   {
-    area: 'Cloud & DevOps',
-    stack: ['Docker', 'Cloudflare', 'Vercel', 'CI/CD', 'GitHub Actions'],
+    area: 'Cloud & Infra',
+    stack: ['AWS', 'Docker', 'Cloudflare', 'CI/CD', 'pgvector'],
     accent: '#00A3FF',
   },
   {
     area: 'Dados & Automação',
-    stack: ['Python', 'Pandas', 'Web Scraping', 'Pipelines', 'OpenAI'],
+    stack: ['Pandas', 'Polars', 'Web Scraping', 'Playwright', 'Pipelines'],
     accent: '#E2E8F0',
+  },
+  {
+    area: 'Frontend & UI',
+    stack: ['React', 'Next.js', 'Tailwind CSS', 'GSAP', 'shadcn/ui'],
+    accent: '#00A3FF',
   },
 ];
 
@@ -243,7 +248,7 @@ export default function About() {
         </div>
 
         {/* Specialties Strip */}
-        <div ref={specialtiesRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+        <div ref={specialtiesRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-8">
           {specialties.map((s) => (
             <div key={s.area}
               className="bento-box px-6 py-7 group hover:-translate-y-1 transition-transform duration-300 flex flex-col gap-4">
