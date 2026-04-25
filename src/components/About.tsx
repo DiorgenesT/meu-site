@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { personalInfo } from '../data/portfolio';
-import { MessageCircle, MapPin, ExternalLink } from 'lucide-react';
+import { MessageCircle, MapPin, ExternalLink, Download } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const specialties = [
@@ -188,6 +188,10 @@ export default function About() {
                 <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-primary text-sm font-medium transition-all duration-300">
                   <FaLinkedinIn className="text-base" /> LinkedIn <ExternalLink className="w-3 h-3 ml-1 opacity-50" />
+                </a>
+                <a href="/cv.pdf" download
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-primary text-sm font-medium transition-all duration-300">
+                  <Download className="w-4 h-4" /> Baixar CV
                 </a>
               </div>
             </div>

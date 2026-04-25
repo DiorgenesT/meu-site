@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { personalInfo, terminalLines } from '../data/portfolio';
-import { ArrowDown, Circle, Terminal as TerminalIcon } from 'lucide-react';
+import { ArrowDown, Circle, Terminal as TerminalIcon, Download } from 'lucide-react';
 import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -320,12 +320,22 @@ export default function Hero() {
 
             {/* Actions & Socials */}
             <div ref={ctaRef} className="opacity-0 pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <button
-                onClick={() => scrollTo('#projects')}
-                className="px-10 py-4 bg-white text-background font-display font-bold text-xs tracking-[0.2em] uppercase hover:bg-accent hover:text-background transition-all duration-500 rounded-full shadow-[0_10px_30px_rgba(255,255,255,0.08)]"
-              >
-                Ver Sistemas
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => scrollTo('#projects')}
+                  className="px-10 py-4 bg-white text-background font-display font-bold text-xs tracking-[0.2em] uppercase hover:bg-accent hover:text-background transition-all duration-500 rounded-full shadow-[0_10px_30px_rgba(255,255,255,0.08)]"
+                >
+                  Ver Sistemas
+                </button>
+                <a
+                  href="/cv.pdf"
+                  download
+                  className="flex items-center gap-2 px-6 py-4 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/25 text-primary text-xs font-display font-bold tracking-[0.15em] uppercase transition-all duration-300"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  CV
+                </a>
+              </div>
 
               <div className="flex items-center gap-4">
                 {[

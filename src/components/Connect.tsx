@@ -2,7 +2,9 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { personalInfo } from '../data/portfolio';
+
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { FaLinkedinIn } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,6 +112,16 @@ export default function Connect() {
               <ArrowUpRight className="relative z-10 w-5 h-5 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </a>
           </div>
+
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-muted/35 hover:text-primary/60 text-[10px] font-mono tracking-[0.3em] uppercase transition-colors duration-300"
+          >
+            <FaLinkedinIn className="w-3 h-3" />
+            ou via linkedin
+          </a>
         </div>
       </div>
 

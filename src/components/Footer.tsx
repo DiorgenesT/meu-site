@@ -86,11 +86,7 @@ export default function Footer() {
           <div className="md:col-span-4">
             <div className="font-mono text-[10px] text-muted uppercase tracking-widest mb-6">Diretório de Links</div>
             <div className="space-y-5">
-              <a href={`mailto:${personalInfo.email}`}
-                className="block text-primary/80 hover:text-accent transition-colors duration-300 text-sm">
-                {personalInfo.email}
-              </a>
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3">
                 {socials.map(({ icon: Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                     className="w-10 h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-muted hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-300">
