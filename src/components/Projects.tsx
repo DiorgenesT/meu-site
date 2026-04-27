@@ -249,7 +249,7 @@ export default function Projects() {
             </div>
             <div className="title-sub">
               <p className="font-mono text-[11px] text-muted/50 tracking-[0.15em] uppercase pb-1">
-                Sistemas reais — entregues em produção
+                Sistemas reais, entregues em produção
               </p>
             </div>
           </div>

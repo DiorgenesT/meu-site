@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const SKILL_GROUPS = [
   {
     title: 'Python Core',
-    desc: 'Linguagem principal — backend de produção',
+    desc: 'Linguagem principal · backend de produção',
     skills: ['Python', 'FastAPI', 'Pydantic / async', 'TypeScript'],
     colSpan: 'md:col-span-2'
   },

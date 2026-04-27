@@ -173,7 +173,7 @@ export default function About() {
               </p>
 
               <p className="text-muted leading-relaxed border-l-[3px] border-accent/20 pl-6 text-sm md:text-base">
-                Minha trajetória não é linear — e isso é um diferencial. Vim da gestão operacional
+                Minha trajetória não é linear, e isso é um diferencial. Vim da gestão operacional
                 e migrei para desenvolvimento de software. Hoje entendo o{' '}
                 <span className="text-primary font-medium">negócio antes do código</span>, o que resulta em
                 sistemas que resolvem problemas reais, não apenas cumprem requisitos técnicos.
